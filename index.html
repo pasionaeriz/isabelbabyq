@@ -195,12 +195,18 @@
   </div>
 
   <!-- MUSIC PLAYER -->
-  <div id="music-player">
-    <audio autoplay loop>
-      <source src="iris.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+<div id="music-player">
+  <audio id="bg-music" autoplay loop>
+    <source src="iris.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <div class="audio-controls">
+    <button onclick="document.getElementById('bg-music').play()">▶ Play</button>
+    <button onclick="document.getElementById('bg-music').pause()">⏸ Pause</button>
   </div>
+</div>
+
+
   
 
   <!-- MAIN CONTENT -->
