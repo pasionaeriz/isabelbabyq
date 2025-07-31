@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(135deg, #ffd6d6, #ffe8e8);
+      font-family: 'Quicksand', sans-serif;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    #lockscreen {
+      background: #fff;
+      color: #444;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      margin: 100px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #lockscreen::before {
+      content: '';
+      position: absolute;
+      width: 120%;
+      height: 100%;
+      background: #fff;
+      border: 2px solid #ff7e8e;
+      transform: rotate(45deg);
+      top: -60%;
+      left: -10%;
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    input[type="text"], button {
+      padding: 10px;
+      margin-top: 15px;
+      width: 100%;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #ff7e8e;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      margin-top: 10px;
+    }
+
+    #error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+
+    #main-content { display: none; }
+
+    h1 {
+      font-size: 2.6em;
+      margin-top: 20px;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    h2 {
+      font-weight: normal;
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      animation: fadeInDown 1.5s ease-in-out;
+    }
+
+    .heart {
+      font-size: 3.2em;
+      animation: pulse 1s infinite;
+    }
+
+    .message {
+      background: rgba(255,255,255,0.3);
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+      font-size: 1.1em;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 30px auto;
+    }
+
+    .photo {
+      background: rgba(255,255,255,0.3);
+      border-radius: 15px;
+      padding: 10px;
+      transition: 0.3s ease;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .photo:hover {
+      box-shadow: 0 0 15px #ff8fa3;
+    }
+
+    .photo img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .caption {
+      margin-top: 8px;
+      font-size: 0.95em;
+      color: #444;
+    }
+
+    #music-player {
+      display: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes flyPlane {
+      0% {
+        transform: translate(-50%, 100%) scale(0.3) rotate(10deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(150vw, -150vh) scale(1.2) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    #paper-plane {
+      position: fixed;
+      bottom: -100px;
+      left: -100px;
+      width: 200px;
+      z-index: 9999;
+      display: none;
+      animation: flyPlane 3s ease-in-out forwards;
+    }
+
+    .final-message {
+      margin: 40px auto;
+      font-size: 1.2em;
+      max-width: 600px;
+      color: #444;
+      animation: fadeInDown 2s ease-in-out;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 { font-size: 2em; }
+      .message { font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Paper Plane Animation -->
+  <img src="plane.png" id="paper-plane" alt="Flying Paper Plane" />
+
+  <!-- PASSWORD SCREEN -->
+  <div id="lockscreen">
+    <h2>DAPAT ALAM MO TO HAAAAAA</h2>
+    <p>What day did you say yes to me?</p>
+    <input type="text" id="passwordInput" placeholder="DATE LANG">
+    <button onclick="checkPassword()">IPASA MO NA</button>
+    <p id="error">WALA WALA, YOU DON'T LOVE ME ANYMOREEEE NAA</p>
+  </div>
+
+  <!-- MUSIC PLAYER -->
+  <div id="music-player">
+    <iframe width="0" height="0"
+      src="https://www.youtube.com/embed/NdYWuo9OFAw?autoplay=1&loop=1&playlist=NdYWuo9OFAw"
+      frameborder="0"
+      allow="autoplay"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="main-content">
+    <div class="heart">❤️</div>
+    <h1>Happy Girlfriend's Day!</h1>
+    <h2>To my one and only, <strong>Isabel</strong></h2>
+
+    <div class="message">
+    HIIII LOVE KOOOO<br><br>
+    Happy Girlfriend's Day pooo. I just want to thank you sa lahat na you did for me <br>
+    <br>
+      I love you always my love
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="photo-gallery">
+      <!-- Sample: repeat this block and rename images and captions as needed -->
+      <div class="photo"><img src="photo0.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo1.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo2.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo3.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo4.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo5.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo6.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo7.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo8.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo9.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo10.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo11.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo12.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo13.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo14.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo15.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo16.jpg"><div class="caption"></div></div>
+      <div class="photo"><img src="photo17.jpg"><div class="caption"></div></div>
+    </div>
+
+    <!-- After Gallery Message -->
+    <div class="final-message">
+        HIIII andito talaga lahat hehe <br>
+        HII Love koooooo, Happy Girlfriend's day poooo!!! your baby boy is always proud of youuuu no matter what happens oke? I'll be your number one supporter everytime love. Andito lang ako lagi para sa'yo, I can be your BFF, BF, at tatay mo HAHAJKHSDHAHAHAHHAHAH eme. Im always here love if you feel down na wen? don't hesitate na mag open up po sa akin love, yk naman na pakikinggan ko lahat ng rants mo sa buhay kahit sobrang liit na bagay yan. Wag ka na rin mahiyang tawagin ako sa bahay niyo ganorn HAHHAHAHAHAHSDLKAH emz. pero yea, I love you always my loveee. <br>
+        <br>
+        I just want to say sorry po sa lahat lahat, lahat ng nagawa ko po na ayaw mo ganon, even the small things na you hate na nagawa ko. Im sorry if palagi akong nagtatampo sa'yo hahahahahha wala love seloso talaga ako fr Kahit na subukan kong iwasan na malungkot or magtampo sa'yo e hindi ko kaya and Im sorry po sa ganyang ugali ko po. And Im not blaming you naman po love aaa. But I hope you say rin po also if nagtatampo ka or nalulungkot ka kasi may nagawa po akong hindi mo gusto. Im willing naman po na pag-usapan yan Kahit maliit na bagay lang po yan love and lagi naman po kita nireremind na magsabi ka po ganon.<br>
+        <br>
+        I hope tayo pa rin po hanggang dulo love, sana wag ka pong mag sawa sa akin. Sana hindi mo po ako iwan love. Im always trying my best naman po to be a better partner po sa'yo and ik sometimes hindi ko po nagagawa and it makes me sad po minsan. Im learning naman po sa mistakes na nagawa ko po love and im trying to be better everyday po for us. I love you always and forever love ko
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value.trim();
+      const correctAnswers = ["08", "8"];
+      if (correctAnswers.includes(input)) {
+        document.getElementById("lockscreen").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+        document.getElementById("music-player").style.display = "block";
+
+        // Show paper plane animation
+        const plane = document.getElementById("paper-plane");
+        plane.style.display = "block";
+        setTimeout(() => {
+          plane.style.display = "none";
+        }, 3000);
+      } else {
+        document.getElementById("error").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
